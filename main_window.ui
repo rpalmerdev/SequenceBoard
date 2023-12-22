@@ -18,6 +18,13 @@
   <property name="windowTitle">
    <string>Sequence Board</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url(':/background.svg');
+background-repeat: no-repeat;
+background-position: center;
+background-size: 100% 100%;
+</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="play_audio_button">
     <property name="geometry">
@@ -1693,18 +1700,10 @@
    <zorder>chan_seq_5</zorder>
    <zorder>chan_seq_6</zorder>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="assets/assets.qrc"/>
+ </resources>
  <connections/>
 </ui>
