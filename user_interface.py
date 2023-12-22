@@ -1,4 +1,3 @@
-import sys
 from PySide6 import QtCore, QtWidgets, QtGui 
 from PySide6.QtUiTools import QUiLoader
 
@@ -28,7 +27,7 @@ class UserInterface(QtCore.QObject):
         self.ui.stop_audio_button.clicked.connect(stop_clicked)
         self.ui.record_audio_button.clicked.connect(record_clicked)
          # Set the window icon
-        self.ui.setWindowIcon(QtGui.QIcon('icon.png'))
+        self.ui.setWindowIcon(QtGui.QIcon('assets/icon.png'))
     def show(self):
         self.ui.show()
  
