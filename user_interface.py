@@ -1,8 +1,6 @@
 from PySide6 import QtCore, QtWidgets, QtGui 
 from PySide6.QtUiTools import QUiLoader
 
-
-
 #testing buttons
 def play_clicked():
         print("Play button clicked!")
@@ -11,10 +9,8 @@ def stop_clicked():
 def record_clicked():
         print("Record button clicked!")
 
-
 #set up a loader object
 loader = QUiLoader()
-
 
 #object to wrap UI
 class UserInterface(QtCore.QObject):

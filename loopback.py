@@ -5,7 +5,6 @@ import threading
 import os
 from pydub import AudioSegment
 
-
 samplerate = 48000
 buffer_size = 128
 gain = 10  # dB
