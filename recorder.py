@@ -7,8 +7,8 @@ class Recorder:
     def __init__(self):
         self.data = []
         self.output_channel = 0
-        self.sample_rate = None  # Initialize sample_rate here
-        self.buffer_size = 256
+        self.sample_rate = None  
+        self.buffer_size = 512  # Initialize buffer_size here
         self.stream = None
 
     def record_audio(self):
