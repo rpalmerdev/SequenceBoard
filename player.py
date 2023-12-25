@@ -2,16 +2,15 @@
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import os
-import threading
 import pygame
 
 class AudioPlayer:
     def __init__(self, directory):
+        pygame.mixer.init()  # Initialize the mixer module first
         self.directory = directory
         self.channel_files = [f"out_{i}.wav" for i in range(1, 7)]  # Channel files
         self.observer = Observer()
-        self.processes = {}
-        pygame.mixer.init()
+        self.channels = [pygame.mixer.Channel(i) for i in range(6)]  # Now you can create the Channel objects
 
     def start(self):
         event_handler = FileSystemEventHandler()
@@ -23,6 +22,8 @@ class AudioPlayer:
         for channel in range(1, 7):  # Check for all channels
             if event.src_path.endswith(f"out_{channel}.wav"):
                 print(f"File modified: {event.src_path}")
+                self.stop_channel(channel)  # Stop the audio for the modified channel
+                
 
     def play_channel(self, channel):
         # Check if the channel number is valid
@@ -37,8 +38,8 @@ class AudioPlayer:
     def play_audio(self, filename, channel):
         filepath = os.path.join(self.directory, filename)
         if os.path.exists(filepath):
-            self.processes[channel] = threading.Thread(target=self.play, args=(filepath,))
-            self.processes[channel].start()
+            sound = pygame.mixer.Sound(filepath)  # Create a Sound object
+            self.channels[channel - 1].play(sound)  # Play the sound on the corresponding channel
         else:
             print(f"File not found: {filepath}")
 
@@ -47,10 +48,8 @@ class AudioPlayer:
         pygame.mixer.music.play()
 
     def stop_channel(self, channel):  # Modify this method
-        if channel in self.processes:
-            pygame.mixer.music.stop()
-            self.processes[channel].join()
-            del self.processes[channel]
+        if 1 <= channel <= 6:
+            self.channels[channel - 1].stop()  # Stop the sound on the corresponding channel
 
 # Use the class
 player = AudioPlayer(os.path.join(os.path.dirname(__file__), 'output'))
