@@ -6,11 +6,11 @@ import pygame
 
 class AudioPlayer:
     def __init__(self, directory):
-        pygame.mixer.init()  # Initialize the mixer module first
+        pygame.mixer.init()  
         self.directory = directory
-        self.channel_files = [f"out_{i}.wav" for i in range(1, 7)]  # Channel files
+        self.channel_files = [f"out_{i}.wav" for i in range(1, 7)]  
         self.observer = Observer()
-        self.channels = [pygame.mixer.Channel(i) for i in range(6)]  # Now you can create the Channel objects
+        self.channels = [pygame.mixer.Channel(i) for i in range(6)]  
 
     def start(self):
         event_handler = FileSystemEventHandler()
@@ -19,10 +19,10 @@ class AudioPlayer:
         self.observer.start()
 
     def on_file_modified(self, event):
-        for channel in range(1, 7):  # Check for all channels
+        for channel in range(1, 7):  
             if event.src_path.endswith(f"out_{channel}.wav"):
                 print(f"File modified: {event.src_path}")
-                self.stop_channel(channel)  # Stop the audio for the modified channel
+                self.stop_channel(channel) 
                 
 
     def play_channel(self, channel):
@@ -38,8 +38,8 @@ class AudioPlayer:
     def play_audio(self, filename, channel):
         filepath = os.path.join(self.directory, filename)
         if os.path.exists(filepath):
-            sound = pygame.mixer.Sound(filepath)  # Create a Sound object
-            self.channels[channel - 1].play(sound)  # Play the sound on the corresponding channel
+            sound = pygame.mixer.Sound(filepath)  
+            self.channels[channel - 1].play(sound)  
         else:
             print(f"File not found: {filepath}")
 
@@ -47,10 +47,10 @@ class AudioPlayer:
         pygame.mixer.music.load(filepath)
         pygame.mixer.music.play()
 
-    def stop_channel(self, channel):  # Modify this method
+    def stop_channel(self, channel): 
         if 1 <= channel <= 6:
-            self.channels[channel - 1].stop()  # Stop the sound on the corresponding channel
+            self.channels[channel - 1].stop()  
 
-# Use the class
+
 player = AudioPlayer(os.path.join(os.path.dirname(__file__), 'output'))
 player.start()
