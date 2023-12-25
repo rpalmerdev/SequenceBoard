@@ -6,9 +6,9 @@ import os
 class Recorder:
     def __init__(self):
         self.data = {1: [], 2: [], 3: [], 4: [], 5: [], 6: []}
-        self.output_channel = 1  # Start from channel 1
+        self.output_channel = 1  
         self.sample_rate = None
-        self.buffer_size = 512  # Initialize buffer_size here
+        self.buffer_size = 512 
         self.stream = None
 
     def record_audio(self):
@@ -19,14 +19,11 @@ class Recorder:
 
         # Get default WASAPI speakers
         default_speakers = p.get_device_info_by_index(wasapi_info["defaultOutputDevice"])
-        self.sample_rate = int(default_speakers["defaultSampleRate"])  # Set sample_rate here
+        self.sample_rate = int(default_speakers["defaultSampleRate"]) 
 
         if not default_speakers["isLoopbackDevice"]:
             for loopback in p.get_loopback_device_info_generator():
-                """
-                Try to find the loopback device with the same name (and [Loopback suffix]).
-                Unfortunately, this is the most adequate way at the moment.
-                """
+                
                 if default_speakers["name"] in loopback["name"]:
                     default_speakers = loopback
                     break
@@ -37,10 +34,10 @@ class Recorder:
 
         print(f"Recording from: ({default_speakers['index']}){default_speakers['name']}")
 
-        # Define the callback function
+        
         def callback(in_data, frame_count, time_info, status):
             data = np.frombuffer(in_data, dtype=np.int16)
-            data = data.reshape(-1, 2)  # Reshape data to a 2-D array
+            data = data.reshape(-1, 2)  # Reshape to a 2-D array (stereo)
             self.data[self.output_channel].append(data)
             return (in_data, pyaudio.paContinue)
 
@@ -67,7 +64,7 @@ class Recorder:
             output_filename = f"out_{self.output_channel}.wav"
             output_path = os.path.join('output', output_filename)
             sf.write(output_path, np.concatenate(self.data[self.output_channel]), self.sample_rate,
-                     'PCM_16')  # Write audio file in stereo
+                     'PCM_16')  # Write in stereo
             self.data[self.output_channel] = []
 
     def set_output_channel(self, channel):
@@ -77,7 +74,6 @@ class Recorder:
 if not os.path.exists('output'):
     os.makedirs('output')
 
-# Create a recorder
 recorder = Recorder()
 
 
