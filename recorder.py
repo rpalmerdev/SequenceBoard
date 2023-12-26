@@ -2,16 +2,22 @@ import soundfile as sf
 import pyaudiowpatch as pyaudio
 import numpy as np
 import os
+import logging
+
+# Constants
+NUM_CHANNELS = 6
 
 class Recorder:
-    def __init__(self):
-        self.data = {1: [], 2: [], 3: [], 4: [], 5: [], 6: []}
+    def __init__(self, buffer_size=512):
+        """Initializes the recorder with empty data for each channel."""
+        self.data = {i: [] for i in range(1, NUM_CHANNELS + 1)}
         self.output_channel = 1  
         self.sample_rate = None
-        self.buffer_size = 512
+        self.buffer_size = buffer_size
         self.stream = None
 
     def record_audio(self):
+        """Records audio from the default output device."""
         p = pyaudio.PyAudio()
 
         # Get default WASAPI info
@@ -23,19 +29,18 @@ class Recorder:
 
         if not default_speakers["isLoopbackDevice"]:
             for loopback in p.get_loopback_device_info_generator():
-                
                 if default_speakers["name"] in loopback["name"]:
                     default_speakers = loopback
                     break
             else:
-                print(
+                logging.error(
                     "Default loopback output device not found.\n\nRun `python -m pyaudiowpatch` to check available devices.\nExiting...\n")
-                exit()
+                raise RuntimeError("Default loopback output device not found")
 
-        print(f"Recording from: ({default_speakers['index']}){default_speakers['name']}")
+        logging.info(f"Recording from: ({default_speakers['index']}){default_speakers['name']}")
 
-        
-        def callback(in_data, frame_count, time_info, status):
+        def callback(in_data: bytes, frame_count: int, time_info, status) -> tuple:
+            """Handles new audio data by appending it to the current output channel's data."""
             data = np.frombuffer(in_data, dtype=np.int16)
             data = data.reshape(-1, 2)  # Reshape to a 2-D array (stereo)
             self.data[self.output_channel].append(data)
@@ -51,7 +56,7 @@ class Recorder:
                              stream_callback=callback)
 
     def start_recording(self):
-        print(f"Recording started for channel {self.output_channel}...")
+        logging.info(f"Recording started for channel {self.output_channel}...")
         self.record_audio()
         self.stream.start_stream()
 
@@ -60,7 +65,7 @@ class Recorder:
             self.stream.stop_stream()
             self.stream.close()
             self.stream = None
-            print(f"Recording stopped for channel {self.output_channel}.")
+            logging.info(f"Recording stopped for channel {self.output_channel}.")
             output_filename = f"out_{self.output_channel}.wav"
             output_path = os.path.join('output', output_filename)
             sf.write(output_path, np.concatenate(self.data[self.output_channel]), self.sample_rate,
