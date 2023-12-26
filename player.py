@@ -1,75 +1,81 @@
-##Program for handling audio playback
-from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
 import os
 import pygame
 from pydub import AudioSegment
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
+import logging
+
+# Constants
+NUM_CHANNELS = 6
+FILE_PATTERN = "out_{i}.wav"
 
 class AudioPlayer:
-    def __init__(self, directory):
+    def __init__(self, directory: str):
+        """Initializes the audio player with the given directory."""
         pygame.mixer.init()  
         self.directory = directory
-        self.channel_files = [f"out_{i}.wav" for i in range(1, 7)]  
+        self.channel_files = [FILE_PATTERN.format(i=i) for i in range(1, NUM_CHANNELS + 1)]  
         self.observer = Observer()
-        self.channels = [pygame.mixer.Channel(i) for i in range(6)]  
+        self.channels = [pygame.mixer.Channel(i) for i in range(NUM_CHANNELS)]  
 
     def start(self):
+        """Starts the file observer."""
         event_handler = FileSystemEventHandler()
         event_handler.on_modified = self.on_file_modified
         self.observer.schedule(event_handler, self.directory, recursive=False)
         self.observer.start()
 
     def on_file_modified(self, event):
-        for channel in range(1, 7):  
-            if event.src_path.endswith(f"out_{channel}.wav"):
-                print(f"File modified: {event.src_path}")
+        """Handles file modification events."""
+        for channel in range(1, NUM_CHANNELS + 1):  
+            if event.src_path.endswith(FILE_PATTERN.format(i=channel)):
+                logging.info(f"File modified: {event.src_path}")
                 self.stop_channel(channel) 
-                
-    def play_channel(self, channel, gain=10):
-        # Check if the channel number is valid
-        if 1 <= channel <= 6:
-            # Stop the current audio for the channel if it's playing
-            self.stop_channel(channel)
-            # Play the corresponding audio file with the specified gain
-            self.play_audio(f"out_{channel}.wav", channel, gain)
-        else:
-            print(f"Invalid channel number: {channel}")
 
-    def play_audio(self, filename, channel, gain=0):
+    def play_channel(self, channel: int, gain: int = 10):
+        """Plays the audio on the given channel with the specified gain."""
+        if 1 <= channel <= NUM_CHANNELS:
+            self.stop_channel(channel)
+            self.play_audio(FILE_PATTERN.format(i=channel), channel, gain)
+        else:
+            logging.error(f"Invalid channel number: {channel}")
+
+    def play_audio(self, filename: str, channel: int, gain: int = 0):
+        """Plays the given audio file on the specified channel with the given gain."""
         filepath = os.path.join(self.directory, filename)
         amplified_filepath = os.path.join(self.directory, f"amplified_{filename}")
         if os.path.exists(filepath):
-            # Check if the amplified file exists and is up-to-date
             if (not os.path.exists(amplified_filepath) or
                 os.path.getmtime(filepath) > os.path.getmtime(amplified_filepath)):
-                # Load the audio file with pydub
-                audio = AudioSegment.from_wav(filepath)
-                # Amplify the audio
-                amplified_audio = audio.apply_gain(gain)
-                # Export the amplified audio to a file
-                amplified_audio.export(amplified_filepath, format="wav")
-            # Load the amplified audio with pygame
+                try:
+                    audio = AudioSegment.from_wav(filepath)
+                    amplified_audio = audio.apply_gain(gain)
+                    amplified_audio.export(amplified_filepath, format="wav")
+                except Exception as e:
+                    logging.error(f"Error processing audio file {filepath}: {e}")
             sound = pygame.mixer.Sound(amplified_filepath)
             self.channels[channel - 1].play(sound)
         else:
-            print(f"File not found: {filepath}")
+            logging.error(f"File not found: {filepath}")
 
-    def play(self, filepath):
+    def play(self, filepath: str):
+        """Plays the given audio file."""
         pygame.mixer.music.load(filepath)
         pygame.mixer.music.play()
 
-    def stop_channel(self, channel): 
-        if 1 <= channel <= 6:
+    def stop_channel(self, channel: int): 
+        """Stops the audio on the given channel."""
+        if 1 <= channel <= NUM_CHANNELS:
             self.channels[channel - 1].stop()
-            
-    def set_volume(self, channel, volume):
-        # Check if the channel number and volume level are valid
-        if 1 <= channel <= 6 and 0.0 <= volume <= 1.0:
+        else:
+            logging.error(f"Invalid channel number: {channel}")
+
+    def set_volume(self, channel: int, volume: float):
+        """Sets the volume for the given channel."""
+        if 1 <= channel <= NUM_CHANNELS and 0.0 <= volume <= 1.0:
             self.channels[channel - 1].set_volume(volume)
         else:
-            print(f"Invalid channel number or volume level: {channel}, {volume}")      
-
+            logging.error(f"Invalid channel number or volume level: {channel}, {volume}")      
 
 player = AudioPlayer(os.path.join(os.path.dirname(__file__), 'output'))
 player.start()
-
