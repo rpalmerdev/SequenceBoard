@@ -8,7 +8,7 @@ class Recorder:
         self.data = {1: [], 2: [], 3: [], 4: [], 5: [], 6: []}
         self.output_channel = 1  
         self.sample_rate = None
-        self.buffer_size = 512 
+        self.buffer_size = 512
         self.stream = None
 
     def record_audio(self):
