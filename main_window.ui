@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>920</width>
-    <height>727</height>
+    <width>800</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="font">
@@ -71,7 +71,7 @@
          <item>
           <widget class="QProgressBar" name="gain_meter_2">
            <property name="value">
-            <number>0</number>
+            <number>75</number>
            </property>
            <property name="textVisible">
             <bool>false</bool>
@@ -222,7 +222,7 @@
          <item>
           <widget class="QProgressBar" name="gain_meter_5">
            <property name="value">
-            <number>0</number>
+            <number>75</number>
            </property>
            <property name="textVisible">
             <bool>false</bool>
@@ -258,7 +258,7 @@
          <item>
           <widget class="QProgressBar" name="gain_meter_1">
            <property name="value">
-            <number>0</number>
+            <number>75</number>
            </property>
            <property name="textVisible">
             <bool>false</bool>
@@ -305,7 +305,7 @@
          <item>
           <widget class="QProgressBar" name="gain_meter_3">
            <property name="value">
-            <number>0</number>
+            <number>75</number>
            </property>
            <property name="textVisible">
             <bool>false</bool>
@@ -419,7 +419,7 @@
          <item>
           <widget class="QProgressBar" name="gain_meter_6">
            <property name="value">
-            <number>0</number>
+            <number>75</number>
            </property>
            <property name="textVisible">
             <bool>false</bool>
@@ -460,7 +460,7 @@
          <item>
           <widget class="QProgressBar" name="gain_meter_4">
            <property name="value">
-            <number>0</number>
+            <number>75</number>
            </property>
            <property name="textVisible">
             <bool>false</bool>

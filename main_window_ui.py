@@ -25,7 +25,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(920, 727)
+        MainWindow.resize(800, 480)
         font = QFont()
         font.setBold(False)
         MainWindow.setFont(font)
@@ -59,7 +59,7 @@ class Ui_MainWindow(object):
 
         self.gain_meter_2 = QProgressBar(self.layoutWidget)
         self.gain_meter_2.setObjectName(u"gain_meter_2")
-        self.gain_meter_2.setValue(0)
+        self.gain_meter_2.setValue(75)
         self.gain_meter_2.setTextVisible(False)
         self.gain_meter_2.setOrientation(Qt.Vertical)
 
@@ -137,7 +137,7 @@ class Ui_MainWindow(object):
 
         self.gain_meter_5 = QProgressBar(self.layoutWidget)
         self.gain_meter_5.setObjectName(u"gain_meter_5")
-        self.gain_meter_5.setValue(0)
+        self.gain_meter_5.setValue(75)
         self.gain_meter_5.setTextVisible(False)
         self.gain_meter_5.setOrientation(Qt.Vertical)
 
@@ -163,7 +163,7 @@ class Ui_MainWindow(object):
 
         self.gain_meter_1 = QProgressBar(self.layoutWidget)
         self.gain_meter_1.setObjectName(u"gain_meter_1")
-        self.gain_meter_1.setValue(0)
+        self.gain_meter_1.setValue(75)
         self.gain_meter_1.setTextVisible(False)
         self.gain_meter_1.setOrientation(Qt.Vertical)
 
@@ -192,7 +192,7 @@ class Ui_MainWindow(object):
 
         self.gain_meter_3 = QProgressBar(self.layoutWidget)
         self.gain_meter_3.setObjectName(u"gain_meter_3")
-        self.gain_meter_3.setValue(0)
+        self.gain_meter_3.setValue(75)
         self.gain_meter_3.setTextVisible(False)
         self.gain_meter_3.setOrientation(Qt.Vertical)
 
@@ -260,7 +260,7 @@ class Ui_MainWindow(object):
 
         self.gain_meter_6 = QProgressBar(self.layoutWidget)
         self.gain_meter_6.setObjectName(u"gain_meter_6")
-        self.gain_meter_6.setValue(0)
+        self.gain_meter_6.setValue(75)
         self.gain_meter_6.setTextVisible(False)
         self.gain_meter_6.setOrientation(Qt.Vertical)
 
@@ -290,7 +290,7 @@ class Ui_MainWindow(object):
 
         self.gain_meter_4 = QProgressBar(self.layoutWidget)
         self.gain_meter_4.setObjectName(u"gain_meter_4")
-        self.gain_meter_4.setValue(0)
+        self.gain_meter_4.setValue(75)
         self.gain_meter_4.setTextVisible(False)
         self.gain_meter_4.setOrientation(Qt.Vertical)
 

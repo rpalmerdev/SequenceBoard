@@ -58,10 +58,26 @@ class UserInterface(QtCore.QObject):
         
         self.ui.play_button_6.pressed.connect(lambda: self.player.play_channel(6))
         self.ui.play_button_6.released.connect(lambda: self.player.stop_channel(6))
+        
+        # Connect the gain sliders
+        self.ui.gain_slider_1.valueChanged.connect(lambda value: self.set_volume(1, value))
+        self.ui.gain_slider_2.valueChanged.connect(lambda value: self.set_volume(2, value))
+        self.ui.gain_slider_3.valueChanged.connect(lambda value: self.set_volume(3, value))
+        self.ui.gain_slider_4.valueChanged.connect(lambda value: self.set_volume(4, value))
+        self.ui.gain_slider_5.valueChanged.connect(lambda value: self.set_volume(5, value))
+        self.ui.gain_slider_6.valueChanged.connect(lambda value: self.set_volume(6, value))
 
     def start_recording_channel(self, channel):
         self.recorder.set_output_channel(channel) 
         self.recorder.start_recording()
+    
+    def set_volume(self, channel, value):
+        # Convert the slider value to a volume level between 0.0 and 1.0
+        volume = value / 100.0
+        self.player.set_volume(channel, volume)
+
+        # Update the corresponding progress bar
+        getattr(self.ui, f'gain_meter_{channel}').setValue(value) 
         
 
     def show(self):

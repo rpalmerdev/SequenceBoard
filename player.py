@@ -3,6 +3,7 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import os
 import pygame
+from pydub import AudioSegment
 
 class AudioPlayer:
     def __init__(self, directory):
@@ -24,22 +25,29 @@ class AudioPlayer:
                 print(f"File modified: {event.src_path}")
                 self.stop_channel(channel) 
                 
-
-    def play_channel(self, channel):
+    def play_channel(self, channel, gain=10):
         # Check if the channel number is valid
         if 1 <= channel <= 6:
             # Stop the current audio for the channel if it's playing
             self.stop_channel(channel)
-            # Play the corresponding audio file
-            self.play_audio(f"out_{channel}.wav", channel)
+            # Play the corresponding audio file with the specified gain
+            self.play_audio(f"out_{channel}.wav", channel, gain)
         else:
             print(f"Invalid channel number: {channel}")
 
-    def play_audio(self, filename, channel):
+    def play_audio(self, filename, channel, gain=0):
         filepath = os.path.join(self.directory, filename)
         if os.path.exists(filepath):
-            sound = pygame.mixer.Sound(filepath)  
-            self.channels[channel - 1].play(sound)  
+            # Load the audio file with pydub
+            audio = AudioSegment.from_wav(filepath)
+            # Amplify the audio
+            amplified_audio = audio.apply_gain(gain)
+            # Export the amplified audio to a temporary file
+            amplified_filepath = os.path.join(self.directory, f"amplified_{filename}")
+            amplified_audio.export(amplified_filepath, format="wav")
+            # Load the amplified audio with pygame
+            sound = pygame.mixer.Sound(amplified_filepath)
+            self.channels[channel - 1].play(sound)
         else:
             print(f"File not found: {filepath}")
 
@@ -49,8 +57,16 @@ class AudioPlayer:
 
     def stop_channel(self, channel): 
         if 1 <= channel <= 6:
-            self.channels[channel - 1].stop()  
+            self.channels[channel - 1].stop()
+            
+    def set_volume(self, channel, volume):
+        # Check if the channel number and volume level are valid
+        if 1 <= channel <= 6 and 0.0 <= volume <= 1.0:
+            self.channels[channel - 1].set_volume(volume)
+        else:
+            print(f"Invalid channel number or volume level: {channel}, {volume}")      
 
 
 player = AudioPlayer(os.path.join(os.path.dirname(__file__), 'output'))
 player.start()
+
