@@ -75,11 +75,9 @@ class UserInterface(QtCore.QObject):
         # Convert the slider value to a volume level between 0.0 and 1.0
         volume = value / 100.0
         self.player.set_volume(channel, volume)
-
         # Update the corresponding progress bar
         getattr(self.ui, f'gain_meter_{channel}').setValue(value) 
         
-
     def show(self):
         self.ui.show()
         
