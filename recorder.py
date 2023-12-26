@@ -9,7 +9,7 @@ NUM_CHANNELS = 6
 
 class Recorder:
     def __init__(self, buffer_size=512):
-        """Initializes the recorder with empty data for each channel."""
+        
         self.data = {i: [] for i in range(1, NUM_CHANNELS + 1)}
         self.output_channel = 1  
         self.sample_rate = None
@@ -17,7 +17,6 @@ class Recorder:
         self.stream = None
 
     def record_audio(self):
-        """Records audio from the default output device."""
         p = pyaudio.PyAudio()
 
         # Get default WASAPI info
@@ -75,10 +74,7 @@ class Recorder:
     def set_output_channel(self, channel):
         self.output_channel = channel
 
-
 if not os.path.exists('output'):
     os.makedirs('output')
 
 recorder = Recorder()
-
-
