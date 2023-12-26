@@ -37,14 +37,17 @@ class AudioPlayer:
 
     def play_audio(self, filename, channel, gain=0):
         filepath = os.path.join(self.directory, filename)
+        amplified_filepath = os.path.join(self.directory, f"amplified_{filename}")
         if os.path.exists(filepath):
-            # Load the audio file with pydub
-            audio = AudioSegment.from_wav(filepath)
-            # Amplify the audio
-            amplified_audio = audio.apply_gain(gain)
-            # Export the amplified audio to a temporary file
-            amplified_filepath = os.path.join(self.directory, f"amplified_{filename}")
-            amplified_audio.export(amplified_filepath, format="wav")
+            # Check if the amplified file exists and is up-to-date
+            if (not os.path.exists(amplified_filepath) or
+                os.path.getmtime(filepath) > os.path.getmtime(amplified_filepath)):
+                # Load the audio file with pydub
+                audio = AudioSegment.from_wav(filepath)
+                # Amplify the audio
+                amplified_audio = audio.apply_gain(gain)
+                # Export the amplified audio to a file
+                amplified_audio.export(amplified_filepath, format="wav")
             # Load the amplified audio with pygame
             sound = pygame.mixer.Sound(amplified_filepath)
             self.channels[channel - 1].play(sound)
