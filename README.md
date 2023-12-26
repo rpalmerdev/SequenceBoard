@@ -11,7 +11,7 @@ Aims to be a six-channel desktop audio loopback recorder with built-in sequencer
 **Currently working on:** Audio trimming with visible waveforms, real-time gain meters, effects processing, sequencer. Probably going to have to figure out threading. 
 
 **Dependencies:**
-Patched PyAudio library called [PyAudioWPatch](https://github.com/s0d3s/PyAudioWPatch/) for loopback functionality on Windows.
+[PyAudioWPatch](https://github.com/s0d3s/PyAudioWPatch/)
 [pygame](https://github.com/pygame/pygame)
 [pyside6](https://pypi.org/project/PySide6/)
 [pydub](https://github.com/jiaaro/pydub)
