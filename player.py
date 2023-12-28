@@ -1,6 +1,5 @@
 import os
 import pygame
-from pydub import AudioSegment
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import logging
@@ -16,7 +15,7 @@ class AudioPlayer:
         self.directory = directory
         self.channel_files = [FILE_PATTERN.format(i=i) for i in range(1, NUM_CHANNELS + 1)]  
         self.observer = Observer()
-        self.channels = {i: pygame.mixer.Channel(i) for i in range(NUM_CHANNELS)}  # Use a dictionary for channels
+        self.channels = {i: pygame.mixer.Channel(i) for i in range(NUM_CHANNELS)}  
         
     # File Observer
     def start(self):
@@ -31,30 +30,21 @@ class AudioPlayer:
                 logging.info(f"File modified: {event.src_path}")
                 self.stop_channel(channel) 
 
-    def play_channel(self, channel: int, gain: int = 10):  #<<< adding gain
+    def play_channel(self, channel: int): 
         if 1 <= channel <= NUM_CHANNELS:
             self.stop_channel(channel)
-            threading.Thread(target=self.play_audio, args=(FILE_PATTERN.format(i=channel), channel, gain)).start()  # Use a thread for file processing
+            threading.Thread(target=self.play_audio, args=(FILE_PATTERN.format(i=channel), channel)).start()  
         else:
             logging.error(f"Invalid channel number: {channel}")
-        
-    def play_audio(self, filename: str, channel: int, gain: int = 0):
+
+    def play_audio(self, filename: str, channel: int):
         filepath = os.path.join(self.directory, filename)
-        amplified_filepath = os.path.join(self.directory, f"amplified_{filename}")
         if os.path.exists(filepath):
-            if (not os.path.exists(amplified_filepath) or
-                os.path.getmtime(filepath) > os.path.getmtime(amplified_filepath)):
-                try:
-                    audio = AudioSegment.from_wav(filepath)
-                    amplified_audio = audio.apply_gain(gain)
-                    amplified_audio.export(amplified_filepath, format="wav")
-                except Exception as e:
-                    logging.error(f"Error processing audio file {filepath}: {e}")
             try:
-                sound = pygame.mixer.Sound(amplified_filepath)
+                sound = pygame.mixer.Sound(filepath)  
                 self.channels[channel - 1].play(sound)
             except pygame.error as e:
-                logging.error(f"Error playing audio file {amplified_filepath}: {e}")
+                logging.error(f"Error playing audio file {filepath}: {e}")
         else:
             logging.error(f"File not found: {filepath}")
 
