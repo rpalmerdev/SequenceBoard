@@ -25,7 +25,7 @@ Audio trimming with visible waveforms, real-time gain meters, effects processing
 [numpy](https://github.com/numpy/numpy)
 
 ## **💸License:** 
-GNU GPL v3
+[GNU GPL v3](https://github.com/rpalmerdev/SequenceBoard/blob/main/LICENSE)
 
 ## 🔥Crappy Showcase Video (loud music)
 
