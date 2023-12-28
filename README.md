@@ -9,7 +9,7 @@ Baby's first coding project, written in Python (3.11.5) with ~~*a little*~~ ***w
 Aims to be a six-channel desktop loopback recorder with built-in sequencer. For making meme-y beats with whatever is playing on your desktop.
 
 ## **✅Currently working:** 
-Loopback recording and playback on Windows to six channels in the GUI with basic per-channel volume control. Basically a soundboard.
+Loopback recording and playback on Windows to six channels in the GUI with per-channel volume control. Basically a soundboard.
 *Note: currently working on **my** Windows desktop with a 13900k. Have noticed some playback issues on my laptop and am investigating.*
 
 ## **❌Currently working on:** 
