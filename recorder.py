@@ -15,6 +15,27 @@ class Recorder:
         self.sample_rate = None
         self.buffer_size = buffer_size
         self.stream = None
+    
+    def get_audio_data(self, channel: int):
+        if 1 <= channel <= NUM_CHANNELS:
+            output_filename = f"out_{channel}.wav"
+            output_path = os.path.join('output', output_filename)
+            if os.path.exists(output_path):
+                try:
+                    data, _ = sf.read(output_path)
+                    if data.ndim == 1:  # Mono audio
+                        return data
+                    elif data.ndim == 2:  # Stereo audio
+                        return data  # Return the entire stereo recording
+                    else:
+                        logging.error(f"Unexpected number of dimensions in audio data: {data.ndim}")
+                except Exception as e:
+                    logging.error(f"Error reading audio file {output_path}: {e}")
+            else:
+                logging.error(f"File not found: {output_path}")
+        else:
+            logging.error(f"Invalid channel number: {channel}")
+        return None
 
     def record_audio(self):
         p = pyaudio.PyAudio()
