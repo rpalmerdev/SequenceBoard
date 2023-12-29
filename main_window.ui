@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>480</height>
+    <width>975</width>
+    <height>586</height>
    </rect>
   </property>
   <property name="font">
@@ -49,17 +49,84 @@
      <rect>
       <x>10</x>
       <y>70</y>
-      <width>744</width>
-      <height>291</height>
+      <width>921</width>
+      <height>431</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="stripLayout">
      <item>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="2">
-        <layout class="QHBoxLayout" name="gain_splitter_2">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetDefaultConstraint</enum>
+       </property>
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>1</number>
+       </property>
+       <property name="rightMargin">
+        <number>5</number>
+       </property>
+       <property name="bottomMargin">
+        <number>9</number>
+       </property>
+       <property name="spacing">
+        <number>5</number>
+       </property>
+       <item row="3" column="10">
+        <widget class="QPushButton" name="play_button_6">
+         <property name="text">
+          <string>Play</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="MPLWidget" name="mplwidget_1" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <bold>false</bold>
+           <kerning>false</kerning>
+          </font>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="6">
+        <widget class="QPushButton" name="play_button_4">
+         <property name="text">
+          <string>Play</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="10">
+        <widget class="MPLWidget" name="mplwidget_6" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <layout class="QHBoxLayout" name="gain_splitter_3">
          <item>
-          <widget class="QSlider" name="gain_slider_2">
+          <widget class="QSlider" name="gain_slider_3">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>200</height>
+            </size>
+           </property>
            <property name="value">
             <number>75</number>
            </property>
@@ -69,7 +136,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QProgressBar" name="gain_meter_2">
+          <widget class="QProgressBar" name="gain_meter_3">
            <property name="value">
             <number>75</number>
            </property>
@@ -83,73 +150,32 @@
          </item>
         </layout>
        </item>
-       <item row="0" column="10">
-        <widget class="QLabel" name="strip_6">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
+       <item row="4" column="0">
+        <widget class="QPushButton" name="record_button_1">
          <property name="text">
-          <string>6</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <string>Record</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
-        <spacer name="channel_spacer_1">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="5">
-        <spacer name="channel_spacer_3">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="8">
-        <widget class="QLabel" name="strip_5">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>5</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
+       <item row="2" column="8">
+        <widget class="MPLWidget" name="mplwidget_5" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
         </widget>
        </item>
-       <item row="2" column="2">
+       <item row="3" column="2">
         <widget class="QPushButton" name="play_button_2">
          <property name="text">
           <string>Play</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="3">
-        <spacer name="channel_spacer_2">
+       <item row="1" column="1">
+        <spacer name="channel_spacer_1">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -177,63 +203,6 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="2">
-        <widget class="QLabel" name="strip_2">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>2</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2">
-        <widget class="QPushButton" name="record_button_2">
-         <property name="text">
-          <string>Record</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="6">
-        <widget class="QPushButton" name="play_button_4">
-         <property name="text">
-          <string>Play</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="8">
-        <layout class="QHBoxLayout" name="gain_splitter_5">
-         <item>
-          <widget class="QSlider" name="gain_slider_5">
-           <property name="value">
-            <number>75</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QProgressBar" name="gain_meter_5">
-           <property name="value">
-            <number>75</number>
-           </property>
-           <property name="textVisible">
-            <bool>false</bool>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
        <item row="1" column="0">
         <layout class="QHBoxLayout" name="gain_splitter_1">
          <item>
@@ -243,6 +212,12 @@
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>200</height>
+            </size>
            </property>
            <property name="value">
             <number>75</number>
@@ -270,30 +245,16 @@
          </item>
         </layout>
        </item>
-       <item row="1" column="7">
-        <spacer name="channel_spacer_4">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="2" column="8">
-        <widget class="QPushButton" name="play_button_5">
-         <property name="text">
-          <string>Play</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="4">
-        <layout class="QHBoxLayout" name="gain_splitter_3">
+       <item row="1" column="6">
+        <layout class="QHBoxLayout" name="gain_splitter_4">
          <item>
-          <widget class="QSlider" name="gain_slider_3">
+          <widget class="QSlider" name="gain_slider_4">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>200</height>
+            </size>
+           </property>
            <property name="value">
             <number>75</number>
            </property>
@@ -303,7 +264,13 @@
           </widget>
          </item>
          <item>
-          <widget class="QProgressBar" name="gain_meter_3">
+          <widget class="QProgressBar" name="gain_meter_4">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>200</height>
+            </size>
+           </property>
            <property name="value">
             <number>75</number>
            </property>
@@ -317,59 +284,22 @@
          </item>
         </layout>
        </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="strip_1">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>1</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="6">
+       <item row="4" column="6">
         <widget class="QPushButton" name="record_button_4">
          <property name="text">
           <string>Record</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="4">
-        <widget class="QPushButton" name="play_button_3">
-         <property name="text">
-          <string>Play</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="4">
-        <widget class="QPushButton" name="record_button_3">
-         <property name="text">
-          <string>Record</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
+       <item row="3" column="0">
         <widget class="QPushButton" name="play_button_1">
          <property name="text">
           <string>Play</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QPushButton" name="record_button_1">
-         <property name="text">
-          <string>Record</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="4">
-        <widget class="QLabel" name="strip_3">
+       <item row="0" column="8">
+        <widget class="QLabel" name="strip_5">
          <property name="font">
           <font>
            <pointsize>14</pointsize>
@@ -377,22 +307,22 @@
           </font>
          </property>
          <property name="text">
-          <string>3</string>
+          <string>5</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
-       <item row="3" column="10">
-        <widget class="QPushButton" name="record_button_6">
+       <item row="3" column="8">
+        <widget class="QPushButton" name="play_button_5">
          <property name="text">
-          <string>Record</string>
+          <string>Play</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="9">
-        <spacer name="channel_spacer_5">
+       <item row="1" column="3">
+        <spacer name="channel_spacer_2">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -404,10 +334,98 @@
          </property>
         </spacer>
        </item>
+       <item row="1" column="2">
+        <layout class="QHBoxLayout" name="gain_splitter_2">
+         <item>
+          <widget class="QSlider" name="gain_slider_2">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>200</height>
+            </size>
+           </property>
+           <property name="value">
+            <number>75</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QProgressBar" name="gain_meter_2">
+           <property name="value">
+            <number>75</number>
+           </property>
+           <property name="textVisible">
+            <bool>false</bool>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="strip_2">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>2</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="8">
+        <layout class="QHBoxLayout" name="gain_splitter_5">
+         <item>
+          <widget class="QSlider" name="gain_slider_5">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>200</height>
+            </size>
+           </property>
+           <property name="value">
+            <number>75</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QProgressBar" name="gain_meter_5">
+           <property name="value">
+            <number>75</number>
+           </property>
+           <property name="textVisible">
+            <bool>false</bool>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
        <item row="1" column="10">
         <layout class="QHBoxLayout" name="gain_splitter_6">
          <item>
           <widget class="QSlider" name="gain_slider_6">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>200</height>
+            </size>
+           </property>
            <property name="value">
             <number>75</number>
            </property>
@@ -431,46 +449,157 @@
          </item>
         </layout>
        </item>
-       <item row="3" column="8">
+       <item row="1" column="5">
+        <spacer name="channel_spacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="7">
+        <spacer name="channel_spacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="strip_1">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>1</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QLabel" name="strip_3">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>3</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="MPLWidget" name="mplwidget_2" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4">
+        <widget class="MPLWidget" name="mplwidget_3" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="10">
+        <widget class="QPushButton" name="record_button_6">
+         <property name="text">
+          <string>Record</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="6">
+        <widget class="MPLWidget" name="mplwidget_4" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="4">
+        <widget class="QPushButton" name="record_button_3">
+         <property name="text">
+          <string>Record</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="8">
         <widget class="QPushButton" name="record_button_5">
          <property name="text">
           <string>Record</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="10">
-        <widget class="QPushButton" name="play_button_6">
+       <item row="3" column="4">
+        <widget class="QPushButton" name="play_button_3">
          <property name="text">
           <string>Play</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="6">
-        <layout class="QHBoxLayout" name="gain_splitter_4">
-         <item>
-          <widget class="QSlider" name="gain_slider_4">
-           <property name="value">
-            <number>75</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QProgressBar" name="gain_meter_4">
-           <property name="value">
-            <number>75</number>
-           </property>
-           <property name="textVisible">
-            <bool>false</bool>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
+       <item row="4" column="2">
+        <widget class="QPushButton" name="record_button_2">
+         <property name="text">
+          <string>Record</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="10">
+        <widget class="QLabel" name="strip_6">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>6</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="9">
+        <spacer name="channel_spacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </item>
@@ -546,6 +675,14 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MPLWidget</class>
+   <extends>QWidget</extends>
+   <header>user_interface.py</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="assets/assets.qrc"/>
  </resources>

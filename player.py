@@ -4,14 +4,18 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import logging
 import threading
+from PySide6.QtCore import QObject, Signal
+import soundfile as sf
 
 # Constants
 NUM_CHANNELS = 6
 FILE_PATTERN = "out_{i}.wav"
 
-class AudioPlayer:
+class AudioPlayer(QObject):
+    audio_loaded = Signal(object)
     def __init__(self, directory: str):
-        pygame.mixer.init()  
+        super().__init__()  # Initialize the QObject base class
+        pygame.mixer.init() 
         self.directory = directory
         self.channel_files = [FILE_PATTERN.format(i=i) for i in range(1, NUM_CHANNELS + 1)]  
         self.observer = Observer()
@@ -41,8 +45,10 @@ class AudioPlayer:
         filepath = os.path.join(self.directory, filename)
         if os.path.exists(filepath):
             try:
-                sound = pygame.mixer.Sound(filepath)  
+                sound = pygame.mixer.Sound(filepath)
                 self.channels[channel - 1].play(sound)
+                data, _ = sf.read(filepath)  # Read the audio data
+                self.audio_loaded.emit(data)  # Emit the audio data
             except pygame.error as e:
                 logging.error(f"Error playing audio file {filepath}: {e}")
         else:
