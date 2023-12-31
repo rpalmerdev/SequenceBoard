@@ -1,7 +1,6 @@
 # 🎵SequenceBoard🎵
 
-##  ![warning](https://github.com/rpalmerdev/SequenceBoard/assets/52892010/45d45d54-2f2e-4262-bd82-98765dda9627) 
-## **(UNDER CONSTRUCTION)** 
+## **⚠️UNDER CONSTRUCTION⚠️** 
 
 
 ![waveform](https://github.com/rpalmerdev/SequenceBoard/assets/52892010/275a7046-e01f-452b-b8a6-55c0a211139a)
