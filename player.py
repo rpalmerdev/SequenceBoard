@@ -7,22 +7,21 @@ import threading
 from PySide6.QtCore import QObject, Signal
 import soundfile as sf
 
-# Constants
 NUM_CHANNELS = 6
 FILE_PATTERN = "out_{i}.wav"
 
 class AudioPlayer(QObject):
     audio_loaded = Signal(object)
     def __init__(self, directory: str):
-        super().__init__()  # Initialize the QObject base class
+        super().__init__() 
+        pygame.mixer.pre_init(buffer=4096)
         pygame.mixer.init() 
         self.directory = directory
         self.channel_files = [FILE_PATTERN.format(i=i) for i in range(1, NUM_CHANNELS + 1)]  
         self.observer = Observer()
         self.channels = {i: pygame.mixer.Channel(i) for i in range(NUM_CHANNELS)}  
         
-    # File Observer
-    def start(self):
+    def start(self): #observer
         event_handler = FileSystemEventHandler()
         event_handler.on_modified = self.on_file_modified
         self.observer.schedule(event_handler, self.directory, recursive=False)
@@ -47,8 +46,8 @@ class AudioPlayer(QObject):
             try:
                 sound = pygame.mixer.Sound(filepath)
                 self.channels[channel - 1].play(sound)
-                data, _ = sf.read(filepath)  # Read the audio data
-                self.audio_loaded.emit(data)  # Emit the audio data
+                data, _ = sf.read(filepath)  
+                self.audio_loaded.emit(data) 
             except pygame.error as e:
                 logging.error(f"Error playing audio file {filepath}: {e}")
         else:

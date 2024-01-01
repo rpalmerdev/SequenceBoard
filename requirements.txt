@@ -9,3 +9,4 @@ pyside6-essentials==6.6.1
 shiboken6==6.6.1
 soundfile==0.12.1
 watchdog==2.1.6
+pyqtgraph==0.13.3
