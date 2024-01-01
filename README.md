@@ -2,8 +2,9 @@
 
 ## **⚠️UNDER CONSTRUCTION⚠️** 
 
+![sboard](https://github.com/rpalmerdev/SequenceBoard/assets/52892010/2d30f708-e328-4e13-937d-da834f856a93)
 
-![waveform](https://github.com/rpalmerdev/SequenceBoard/assets/52892010/275a7046-e01f-452b-b8a6-55c0a211139a)
+
 Baby's first coding project, written in Python (3.11.5) with ~~*a little*~~ ***way*** too much help from GitHub Copilot. 😅
 
 Aims to be a six-channel desktop loopback recorder with built-in sequencer. For making meme-y beats with whatever is playing on your desktop.
