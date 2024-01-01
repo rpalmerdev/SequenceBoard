@@ -4,7 +4,6 @@ import numpy as np
 import os
 import logging
 
-# Constants
 NUM_CHANNELS = 6
 
 class Recorder:
@@ -23,10 +22,12 @@ class Recorder:
             if os.path.exists(output_path):
                 try:
                     data, _ = sf.read(output_path)
-                    if data.ndim == 1:  # Mono audio
-                        return data
-                    elif data.ndim == 2:  # Stereo audio
-                        return data  # Return the entire stereo recording
+                    if data.ndim == 1:  # Mono 
+                        t = np.arange(len(data)) / self.sample_rate
+                        return t, data
+                    elif data.ndim == 2:  # Stereo 
+                        t = np.arange(len(data)) / self.sample_rate
+                        return t, data
                     else:
                         logging.error(f"Unexpected number of dimensions in audio data: {data.ndim}")
                 except Exception as e:
@@ -35,15 +36,13 @@ class Recorder:
                 logging.error(f"File not found: {output_path}")
         else:
             logging.error(f"Invalid channel number: {channel}")
-        return None
+        return None, None
 
     def record_audio(self):
         p = pyaudio.PyAudio()
 
         # Get default WASAPI info
         wasapi_info = p.get_host_api_info_by_type(pyaudio.paWASAPI)
-
-        # Get default WASAPI speakers
         default_speakers = p.get_device_info_by_index(wasapi_info["defaultOutputDevice"])
         self.sample_rate = int(default_speakers["defaultSampleRate"]) 
 
@@ -62,7 +61,7 @@ class Recorder:
         def callback(in_data: bytes, frame_count: int, time_info, status) -> tuple:
             """Handles new audio data by appending it to the current output channel's data."""
             data = np.frombuffer(in_data, dtype=np.int16)
-            data = data.reshape(-1, 2)  # Reshape to a 2-D array (stereo)
+            data = data.reshape(-1, 2)  #2-D array (stereo)
             self.data[self.output_channel].append(data)
             return (in_data, pyaudio.paContinue)
 
@@ -89,7 +88,7 @@ class Recorder:
             output_filename = f"out_{self.output_channel}.wav"
             output_path = os.path.join('output', output_filename)
             sf.write(output_path, np.concatenate(self.data[self.output_channel]), self.sample_rate,
-                     'PCM_16')  # Write in stereo
+                     'PCM_16')  #stereo
             self.data[self.output_channel] = []
 
     def set_output_channel(self, channel):

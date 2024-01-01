@@ -2,4 +2,8 @@
   <qresource prefix="/">
     <file>background.svg</file>
   </qresource>
+  <qresource>
+    <file>play_icon.png</file>
+    <file>record_icon.png</file>
+  </qresource>
 </RCC>
