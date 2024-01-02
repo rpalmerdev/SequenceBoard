@@ -2,7 +2,8 @@
 
 ## **⚠️UNDER CONSTRUCTION⚠️** 
 
-![sboard](https://github.com/rpalmerdev/SequenceBoard/assets/52892010/2d30f708-e328-4e13-937d-da834f856a93)
+![sboardd](https://github.com/rpalmerdev/SequenceBoard/assets/52892010/3fb477ad-99d8-43f8-b0e0-b391d553d3eb)
+
 
 
 Baby's first coding project, written in Python (3.11.5) with ~~*a little*~~ ***way*** too much help from GitHub Copilot. 😅
